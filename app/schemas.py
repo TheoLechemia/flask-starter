@@ -9,17 +9,18 @@ from utils_flask_sqla.schema import SmartRelationshipsMixin
 
 
 from app.env import ma
+from app.models import Demarche, Dossier
 
 
 class DemarcheSchema(SmartRelationshipsMixin, ma.SQLAlchemyAutoSchema):
     class Meta:
-        # model = User
+        model = Demarche
         include_fk = True
 
 
 class DossierSchema(SmartRelationshipsMixin, ma.SQLAlchemyAutoSchema):
     class Meta:
-        # model = Organism
+        model = Dossier
         include_fk = True
 
     demarche = Nested(DemarcheSchema)

@@ -24,7 +24,7 @@ class Dossier(db.Model):
     id_demarche: Mapped[int] = mapped_column(
         Integer, ForeignKey("ds.demarche.id_demarche")
     )
-    # demarche: Mapped[Demarche] = relationship()
+    demarche: Mapped[Demarche] = relationship()
     statut: Mapped[str] = mapped_column()
 
 
