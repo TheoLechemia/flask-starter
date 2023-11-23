@@ -30,6 +30,7 @@ setuptools.setup(
         "toml",
         "psycopg2",
         "flask_marshmallow",
+        "flask-migrate",
     ],
     extras_require={
         "tests": [
