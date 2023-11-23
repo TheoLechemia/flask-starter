@@ -13,7 +13,7 @@ class Demarche(db.Model):
     __tablename__ = "demarche"
     __table_args__ = {"schema": "ds"}
 
-    id_demarche: mapped_column(Integer, primary_key=True)
+    id_demarche: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
 class Dossier(db.Model):
@@ -24,7 +24,7 @@ class Dossier(db.Model):
     id_demarche: Mapped[int] = mapped_column(
         Integer, ForeignKey("ds.demarche.id_demarche")
     )
-    demarche: Mapped[Demarche] = relationship()
+    # demarche: Mapped[Demarche] = relationship()
     statut: Mapped[str] = mapped_column()
 
 
@@ -47,7 +47,7 @@ class GeoArea(db.Model):
     geojson: Mapped[str] = mapped_column()
 
 
-class GeoArea(db.Model):
+class File(db.Model):
     __tablename__ = "file"
     __table_args__ = {"schema": "ds"}
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
