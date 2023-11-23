@@ -2,9 +2,9 @@ from pathlib import Path
 
 import toml
 
-from app.config.config_schema import ConfigSchema
+from .config_schema import ConfigSchema
 
-from app.env import APP_DIR
+from env import APP_DIR
 
 
 def load_config():

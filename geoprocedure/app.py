@@ -3,9 +3,9 @@ from flask import Flask
 # from flask_sqlalchemy_app.env import db
 # from .config.config import config
 
-from app.config.config import config
+from geoprocedure.config.config import config
 
-from app.env import APP_DIR, db, ma, migrate
+from geoprocedure.env import APP_DIR, db, ma, migrate
 
 
 def create_app():
@@ -15,7 +15,7 @@ def create_app():
     ma.init_app(app)
     migrate.init_app(app, db)
 
-    from app.blueprint import routes
+    from geoprocedure.blueprint import routes
 
     app.register_blueprint(routes)
     return app
