@@ -10,16 +10,16 @@ with (root_dir / "README.md").open() as f:
 
 
 setuptools.setup(
-    name="flask-sqlalchemy-app",
+    name="geoprocedure",
+    version=version,
     description="TODO",
     long_description=long_description,
     long_description_content_type="text/markdown",
     maintainer="Théo Lechémia",
     url="https://github.com/PnX-SI/GeoNature/",
-    python_requires=">=3.9",
-    version=version,
-    packages=setuptools.find_packages("app"),
-    package_dir={"": "app"},
+    packages=setuptools.find_packages("src"),
+    package_dir={"": "src"},
+    python_requires=">=3.8",
     install_requires=[
         "flask",
         "sqlalchemy",
@@ -44,5 +44,5 @@ setuptools.setup(
         "Framework :: Flask",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
-    ],
+    ]
 )

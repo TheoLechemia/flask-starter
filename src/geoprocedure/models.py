@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from app.env import db
+from geoprocedure.env import db
 
 from sqlalchemy import Integer, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, raiseload, joinedload, relationship
