@@ -9,41 +9,23 @@ from sqlalchemy.orm import Mapped, mapped_column, raiseload, joinedload, relatio
 from sqlalchemy.sql.expression import Select
 
 
-class UserSelect(Select):
-    inherit_cache = True
+class Demarche(db.Model):
+    __tablename__ = "demarche"
+    __table_args__ = {"schema": "ds"}
 
-    def auto_joinload(self, model, fields=[]):
-        query_option = [raiseload("*")]
-        for f in fields:
-            if f in model.__mapper__.relationships:
-                query_option.append(joinedload(getattr(model, f)))
-        self = self.options(*tuple(query_option))
-        return self
-
-    def where_identifant(self, value):
-        return self.filter_by(identifiant=value)
+    id_demarche: mapped_column(Integer, primary_key=True)
 
 
-class Organism(db.Model):
-    __tablename__ = "bib_organismes"
-    __table_args__ = {"schema": "utilisateurs"}
-    id_organisme: Mapped[int] = mapped_column(Integer, primary_key=True)
-    nom_organisme: Mapped[str] = mapped_column(String, unique=True, nullable=False)
+class Dossier(db.Model):
+    __tablename__ = "dossier"
+    __table_args__ = {"schema": "ds"}
 
-
-class User(db.Model):
-    __tablename__ = "t_roles"
-    __table_args__ = {"schema": "utilisateurs"}
-    __select_class__ = UserSelect
-
-    id_role: Mapped[int] = mapped_column(Integer, primary_key=True)
-    identifiant: Mapped[str] = mapped_column(String, unique=True, nullable=False)
-    email: Mapped[str] = mapped_column(String)
-    id_organisme: Mapped[int] = mapped_column(
-        String, ForeignKey("utilisateurs.bib_organismes.id_organisme")
+    id_dossier: Mapped[int] = mapped_column(Integer, primary_key=True)
+    id_demarche: Mapped[int] = mapped_column(
+        Integer, ForeignKey("ds.demarche.id_demarche")
     )
-    active = db.Column(db.Boolean)
-    organism: Mapped["Organism"] = relationship()
+    demarche: Mapped[Demarche] = relationship()
+    statut: Mapped[str] = mapped_column()
 
 
 class Champs(db.Model):
@@ -57,7 +39,7 @@ class Champs(db.Model):
     updated_at: Mapped[datetime] = mapped_column()
 
 
-class GeoArea(Champs, db.Model):
+class GeoArea(db.Model):
     __tablename__ = "geo_area"
     __table_args__ = {"schema": "ds"}
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -65,7 +47,7 @@ class GeoArea(Champs, db.Model):
     geojson: Mapped[str] = mapped_column()
 
 
-class GeoArea(Champs, db.Model):
+class GeoArea(db.Model):
     __tablename__ = "file"
     __table_args__ = {"schema": "ds"}
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
