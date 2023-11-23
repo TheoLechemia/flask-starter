@@ -9,18 +9,20 @@ from utils_flask_sqla.schema import SmartRelationshipsMixin
 
 
 from app.env import ma
-from app.models import User, Organism
 
 
-class OrganismSchema(SmartRelationshipsMixin, ma.SQLAlchemyAutoSchema):
+class DemarcheSchema(SmartRelationshipsMixin, ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Organism
+        # model = User
         include_fk = True
 
 
-class UserSchema(SmartRelationshipsMixin, ma.SQLAlchemyAutoSchema):
+class DossierSchema(SmartRelationshipsMixin, ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = User
+        # model = Organism
         include_fk = True
 
-    organism = Nested(OrganismSchema)
+    demarche = Nested(DemarcheSchema)
+
+
+DemarcheSchema.dossier = Nested(DossierSchema)
