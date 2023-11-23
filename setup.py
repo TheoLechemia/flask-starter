@@ -11,15 +11,15 @@ with (root_dir / "README.md").open() as f:
 
 setuptools.setup(
     name="geoprocedure",
+    version=version,
     description="TODO",
     long_description=long_description,
     long_description_content_type="text/markdown",
     maintainer="Théo Lechémia",
     url="https://github.com/PnX-SI/GeoNature/",
-    python_requires=">=3.9",
-    version=version,
-    packages=setuptools.find_packages("geoprocedure"),
-    package_dir={"": "geoprocedure"},
+    packages=setuptools.find_packages("src"),
+    package_dir={"": "src"},
+    python_requires=">=3.8",
     install_requires=[
         "flask",
         "sqlalchemy",
